@@ -1,6 +1,8 @@
 public class Assignment01Q05 {
     public static int findShortestPath(int[][] m, int i, int j) { 
         int n = m.length;
+        if (i == j)
+            return 0;
         int[] dist = new int[n];
         for (int k=0 ; k<dist.length ;k++)
             dist[k] = (-1); 
@@ -11,15 +13,21 @@ public class Assignment01Q05 {
         int tail = 0;
         queue[tail] = i; // i is in the queue
         tail++; // tail is updated
-
-
-
-
-
-        return -1;
-        if (i == j)
-            return 0; 
+        while (head != tail) {
+            int u = queue[head];
+            head ++;
+            for (int v=0; v<m[u].length ; v++){
+            if (m[u][v] == 1 && dist[v] == (-1)){
+                dist[v] = dist[u] + 1;
+                if (v == j)
+                    return dist[v];
+                queue[tail] = v;
+                tail ++; 
+            }
+            }
         }
+        return -1;
+
     }
 
     public static void main(String[] args) {
